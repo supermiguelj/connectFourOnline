@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="createPage.css" rel="stylesheet">
+    <title>Login Information</title>
+</head>
+
+<div>
+    <h1>Please enter your information below to create an account.</h1>
+    <form action="">
+        <label for="username">Account Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Account Password:</label>
+        <input type="password" id="password" name="password" required>
+        <div class="wrapCreate">
+            <button type="create">Create Account</button>
+        </div>
+    </form>
+    <h3>Already have an account? Click the button below to log in.</h3>
+    <button id="loginButton" onclick="window.location.href = 'loginPage.html'">Log in</button>
+</div>
+
+</html>

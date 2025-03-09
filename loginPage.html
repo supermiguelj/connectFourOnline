@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="loginPage.css" rel="stylesheet">
+    <title>Login Information</title>
+</head>
+
+<div>
+    <h1>Login Information</h1>
+    <form action="">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <div class="wrapLogin">
+            <button type="login">Login</button>
+        </div>
+    </form>
+    <h3>New to our site? Click the button below to create an account.</h3>
+    <button id="createButton" onclick="window.location.href = 'createPage.html'">Create Account</button>
+</div>
+
+</html>
