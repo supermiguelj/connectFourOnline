@@ -1,0 +1,32 @@
+body {
+    font-family: "League Spartan";
+    font-size: 16px;
+    background-image: linear-gradient(to bottom right, rgb(50,50,136), rgb(7,0,36));
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+#loginDiv {
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 20px;
+    border: 2px solid rgba(0, 0, 0, 1);
+    border-radius: 16px;
+    text-align: center;
+    margin: auto;
+    margin-top: +64px;
+    width: 512px;
+}
+
+#h3Login {
+    margin-bottom: 8px;
+}
+
+.tab1 {
+    display: inline-block;
+    margin-left: 6px;
+}
+
+#wrapLogin {
+    margin: auto;
+    margin-top: +8px;
+}
