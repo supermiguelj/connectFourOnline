@@ -1,4 +1,4 @@
-package com.connectfour.connectfour.DTO;
+package com.connectfour.DTO;
 
 // THIS IS THE PAYLOAD
 // This is a Data-Transfer Object used to send the payload from the React frontend to the

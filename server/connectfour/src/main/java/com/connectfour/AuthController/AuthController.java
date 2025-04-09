@@ -1,4 +1,4 @@
-package com.connectfour.connectfour.AuthController;
+package com.connectfour.AuthController;
 
 import java.util.Map;
 import java.util.Optional;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.connectfour.connectfour.DTO.LoginRequest;
-import com.connectfour.connectfour.Entity.User;
-import com.connectfour.connectfour.Repository.UserRepository;
+import com.connectfour.DTO.LoginRequest;
+import com.connectfour.Entity.User;
+import com.connectfour.Repository.UserRepository;
 
 // This is the REST API that uses the DTO as a payload for sending it as a POST request to
 // The backend 

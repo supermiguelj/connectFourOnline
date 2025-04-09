@@ -1,4 +1,4 @@
-package com.connectfour.connectfour.Entity;
+package com.connectfour.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

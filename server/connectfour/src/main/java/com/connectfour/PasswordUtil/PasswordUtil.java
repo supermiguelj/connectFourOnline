@@ -1,4 +1,4 @@
-package com.connectfour.connectfour.PasswordUtil;
+package com.connectfour.PasswordUtil;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
