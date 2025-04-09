@@ -54,7 +54,7 @@ function LoginPage() {
       </h3>
       <button
         id="buttonCreate"
-        onClick={() => (window.location.href = "/create-account")}
+        onClick={() => (window.location.href = "/register")}
       >
         Create Account
       </button>

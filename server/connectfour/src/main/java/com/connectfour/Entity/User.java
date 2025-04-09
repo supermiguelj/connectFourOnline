@@ -11,6 +11,11 @@ public class User {
     private String username;
     private String passwordHash;
 
+    public User(String name, String hashedPassword) {
+        username = name;
+        passwordHash = hashedPassword;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -19,5 +24,8 @@ public class User {
     }
     public String getPasswordHash() {
         return passwordHash;
+    }
+    public void setPasswordHash(String newPasswordHash) {
+        passwordHash = newPasswordHash;
     }
 }

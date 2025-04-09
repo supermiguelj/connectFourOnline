@@ -8,11 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.connectfour.DTO.LoginRequest;
+import com.connectfour.DTO.RegisterRequest;
 import com.connectfour.Entity.User;
 import com.connectfour.Repository.UserRepository;
 
@@ -24,6 +26,8 @@ import com.connectfour.Repository.UserRepository;
 public class AuthController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     // Maps the POST request with the /login page, retrieving credentials and directing it
     // To the database
@@ -47,10 +51,37 @@ public class AuthController {
         }
     }
 
+    // Maps POST request with /register page, sending new credentials into the users table
+    // In the database
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterRequest payload) {
+        // Checks if username already exists
+        if (userRepository.findByUsername(payload.getUsername()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Username is already taken");
+        }
+
+        // Username does not exist from here on out
+
+        // Hashes password
+        String hashedPassword = encoder.encode(payload.getPassword());
+
+        // Creates new User
+        User newUser = new User(payload.getUsername(), hashedPassword);
+
+        // Saves to Database
+        userRepository.save(newUser);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("User successfully registered!");
+    }
+
     // Used for password encryption validation check
     private boolean checkPassword(String inputPassword, String storedHash) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.matches(inputPassword, storedHash);
-    }
-     
+    } 
+
+    @GetMapping("/test-cors")
+public ResponseEntity<String> testCors() {
+    return ResponseEntity.ok("CORS is working!");
+}
+
 }

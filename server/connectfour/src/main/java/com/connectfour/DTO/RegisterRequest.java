@@ -1,9 +1,9 @@
 package com.connectfour.DTO;
 
-// THIS IS THE PAYLOAD for /login
+// THIS IS THE PAYLOAD for /register
 // This is a Data-Transfer Object used to send the payload from the React frontend to the
 // Spring Boot backend
-public class LoginRequest {
+public class RegisterRequest {
     private String username;
     private String password;
 
@@ -22,6 +22,4 @@ public class LoginRequest {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
 }
