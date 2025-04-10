@@ -1,12 +1,13 @@
 package com.connectfour.PasswordUtil;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class PasswordUtil {
-    private static final PasswordEncoder encoder = new BCryptPasswordEncoder();
-
     public static String hashPassword(String plainPassword) {
-        return encoder.encode(plainPassword);
+        return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
+    }
+
+    public static boolean checkPassword(String plainPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 }

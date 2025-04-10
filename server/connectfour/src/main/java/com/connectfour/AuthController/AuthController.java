@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.connectfour.DTO.LoginRequest;
 import com.connectfour.DTO.RegisterRequest;
 import com.connectfour.Entity.User;
-import com.connectfour.Repository.UserRepository;
+import com.connectfour.PasswordUtil.PasswordUtil;
+import com.connectfour.Repository.UserRepository;;
 
 // This is the REST API that uses the DTO as a payload for sending it as a POST request to
 // The backend 
@@ -26,8 +26,6 @@ import com.connectfour.Repository.UserRepository;
 public class AuthController {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private BCryptPasswordEncoder encoder;
 
     // Maps the POST request with the /login page, retrieving credentials and directing it
     // To the database
@@ -40,7 +38,7 @@ public class AuthController {
             User user = userOpt.get();
 
             // Checks for password validation
-            if (checkPassword(payload.getPassword(), user.getPasswordHash())) { //Passoword matches
+            if (PasswordUtil.checkPassword(payload.getPassword(), user.getPasswordHash())) { //Passoword matches
                 return ResponseEntity.ok(Map.of("message", "Login Successful!"));
             } else { // Incorrect Password
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Password");
@@ -63,7 +61,7 @@ public class AuthController {
         // Username does not exist from here on out
 
         // Hashes password
-        String hashedPassword = encoder.encode(payload.getPassword());
+        String hashedPassword = PasswordUtil.hashPassword(payload.getPassword());
 
         // Creates new User
         User newUser = new User(payload.getUsername(), hashedPassword);
@@ -73,11 +71,6 @@ public class AuthController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body("User successfully registered!");
     }
-
-    // Used for password encryption validation check
-    private boolean checkPassword(String inputPassword, String storedHash) {
-        return encoder.matches(inputPassword, storedHash);
-    } 
 
     @GetMapping("/test-cors")
 public ResponseEntity<String> testCors() {
