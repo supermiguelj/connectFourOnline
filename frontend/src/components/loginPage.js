@@ -7,6 +7,8 @@ function LoginPage() {
     password: "",
   });
 
+  const [errorMessage, setErrorMessage] = useState(""); // State for error messages
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -14,10 +16,31 @@ function LoginPage() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("User Logged In:", formData);
-    // Add form submission logic here (e.g., send to backend)
+
+    try {
+      const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert(data.message || "Login Successful!");
+        // Redirect to the desired page after login, e.g., home page or dashboard
+        window.location.href = "/home";
+      } else {
+        const errorMsg = await response.json();
+        setErrorMessage(errorMsg.NOT_FOUND || errorMsg.UNAUTHORIZED || "Login failed.");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setErrorMessage("Something went wrong. Please try again later.");
+    }
   };
 
   return (
@@ -49,6 +72,7 @@ function LoginPage() {
           <button type="submit">Login</button>
         </div>
       </form>
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>} {/* Display error message */}
       <h3 id="h3Login">
         New to our site? Click the button below to create an account.
       </h3>

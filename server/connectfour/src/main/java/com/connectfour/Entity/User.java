@@ -11,6 +11,11 @@ public class User {
     private String username;
     private String passwordHash;
 
+    // No-arg constructor required so Hibernate doesn't have a panic attack
+    public User() {
+        // Empty
+    }
+
     public User(String name, String hashedPassword) {
         username = name;
         passwordHash = hashedPassword;
