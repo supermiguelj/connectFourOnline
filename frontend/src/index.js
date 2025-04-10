@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import CreatePage from "./components/createPage";
 import LoginPage from "./components/loginPage";
+import HomePage from "./components/home";
 import "./index.css";
 import logo from './Connect4OnlineLogo.png';
 
@@ -35,16 +36,3 @@ root.render(
       </BrowserRouter>
     </React.StrictMode>
   );
-
-
-/*
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-      <LoginPage />
-      <CreatePage />
-    </BrowserRouter>
-  </React.StrictMode>
-);
-*/

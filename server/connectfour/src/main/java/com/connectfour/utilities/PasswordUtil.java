@@ -1,4 +1,4 @@
-package com.connectfour.PasswordUtil;
+package com.connectfour.utilities;
 
 import org.mindrot.jbcrypt.BCrypt;
 

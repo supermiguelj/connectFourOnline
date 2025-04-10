@@ -28,10 +28,11 @@ function LoginPage() {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
         alert(data.message || "Login Successful!");
-        // Redirect to the desired page after login, e.g., home page or dashboard
+        localStorage.setItem("token", data.token); // Saves token
+        // Redirects to the desired page after login, e.g., home page or dashboard
         window.location.href = "/home";
       } else {
         const errorMsg = await response.json();

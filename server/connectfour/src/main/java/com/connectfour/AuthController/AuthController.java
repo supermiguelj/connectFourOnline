@@ -5,19 +5,23 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import static org.springframework.http.ResponseEntity.ok;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.connectfour.DTO.LoginRequest;
-import com.connectfour.DTO.RegisterRequest;
-import com.connectfour.Entity.User;
-import com.connectfour.PasswordUtil.PasswordUtil;
-import com.connectfour.Repository.UserRepository;
-;
+import com.connectfour.dto.LoginRequest;
+import com.connectfour.dto.RegisterRequest;
+import com.connectfour.entity.User;
+import com.connectfour.repository.UserRepository;
+import com.connectfour.utilities.JwtUtil;
+import com.connectfour.utilities.PasswordUtil;
+
 
 // This is the REST API that uses the DTO as a payload for sending it as a POST request to
 // The backend 
@@ -41,8 +45,12 @@ public class AuthController {
 
             // Checks for password validation
             if (PasswordUtil.checkPassword(payload.getPassword(), user.getPasswordHash())) { //Passoword matches
+                // Handles token generation for session
+                String jwt = JwtUtil.generateToken(user);
                 response.put("message", "Login Successful!");
-                return ResponseEntity.ok(response);
+                // Sends the key back to the client
+                response.put("token", jwt);
+                return ok(response);
             } else { // Incorrect Password
                 response.put("UNAUTHORIZED", "Invalid Password");
                 return ResponseEntity.badRequest().body(response);
@@ -64,25 +72,16 @@ public class AuthController {
             response.put("message", "Username already taken.");
             return ResponseEntity.badRequest().body(response);
         }
-        for (int i = 0; i < 5; i++)
-            System.out.println("1");
 
         // Username does not exist from here on out
 
         // Hashes password
         String hashedPassword = PasswordUtil.hashPassword(payload.getPassword());
-        for (int i = 0; i < 5; i++)
-            System.out.println("2");
 
         // Creates new User
         User newUser = new User(payload.getUsername(), hashedPassword);
-        for (int i = 0; i < 5; i++)
-            System.out.println("3");
-
         // Saves to Database
         userRepository.save(newUser);
-        for (int i = 0; i < 5; i++)
-            System.out.println("4");
 
         response.put("message", "User successfully registered");
         return ResponseEntity.ok(response);
@@ -90,8 +89,15 @@ public class AuthController {
     }
 
     @GetMapping("/home")
-    public ResponseEntity<String> testCors() {
+    public ResponseEntity<String> testCors(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer", "");
+        // Token authentication fails
+        if (!JwtUtil.validateToken(token)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Session token has expired");
+        }
+
+        // Validates session for user
+        String username = JwtUtil.extractUsername(token);
         return ResponseEntity.ok("You are logged on!");
     }
-
 }
