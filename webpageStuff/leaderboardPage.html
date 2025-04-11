@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="leaderboardPage.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=League Spartan' rel='stylesheet'>
+    <title>Leaderboard</title>
+</head>
+
+<div id="leaderboardDiv">
+    <h1>Leaderboard</h1>
+    <div id="contentDiv">
+        <button class="button" id="buttonMenu" onclick="window.location.href = 'menuPage.html'">Back to Menu</button> <br></br>
+        <table id="leaderboard">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Games Played</th>
+                    <th>Win Percent</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboardBody"></tbody>
+            <script>
+                // Example Players, replace with actual data later.
+                // Should probably also make rank equal to the row in the table, minus the header row.
+                const players = [
+                    {rank: "1", username: "mango2226", gamesPlayed: "15", winPercent: "73%"},
+                    {rank: "2", username: "placeholder", gamesPlayed: "20", winPercent: "45%"},
+                    {rank: "3", username: "Xx_PUPPYKICKER_xX", gamesPlayed: "27", winPercent: "41%"},
+                ]
+                function loadLeaderboardData(player)
+                {
+                    const table = document.getElementById("leaderboardBody");
+                    players.forEach( player =>
+                    {
+                        let row = table.insertRow();
+                        let rank = row.insertCell(0);
+                        rank.innerHTML = player.rank;
+                        let username = row.insertCell(1);
+                        username.innerHTML = player.username;
+                        let gamesPlayed = row.insertCell(2);
+                        gamesPlayed.innerHTML = player.gamesPlayed;
+                        let winPercent = row.insertCell(3);
+                        winPercent.innerHTML = player.winPercent;
+                    });
+                }
+                loadLeaderboardData(players);
+            </script>
+        </table>
+        <button class="button" id="buttonMenu" onclick="window.location.href = 'menuPage.html'">Back to Menu</button> <br></br>
+    </div>  
+</div>
+
+</html>

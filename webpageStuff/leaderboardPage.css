@@ -1,0 +1,55 @@
+body {
+    font-family: "League Spartan";
+    font-size: 16px;
+    background-image: linear-gradient(to bottom right, rgb(50,50,136), rgb(7,0,36));
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+#leaderboardDiv {
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 20px;
+    border: 2px solid rgba(0, 0, 0, 1);
+    border-radius: 16px;
+    text-align: center;
+    margin: auto;
+    margin-top: +64px;
+    width: 25%;
+    min-width: 450px;
+}
+
+table {
+    align-self: center;
+    background-color: white;
+    border-collapse: collapse;
+    border-color: black;
+    border-style: solid;
+    border-width: 4px;
+    margin-bottom: 16px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th, td {
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.button {
+    width: 40%;
+    min-width: 100px;
+    border: auto;
+    border-color: rgba(0, 0, 0, 1);
+    border-width: 8px;
+}
+
+.tab1 {
+    display: inline-block;
+    margin-left: 6px;
+}
+
+#wrapLogin {
+    margin: auto;
+    margin-top: +8px;
+}
