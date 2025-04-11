@@ -8,8 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.connectfour.entity.User;
 
+
 // Creates repo to interact with users table in the database
 @Repository
 public interface UserRepository extends JpaRepository<User, String>{
+
     Optional<User> findByUsername(String username);
+
 }

@@ -1,4 +1,4 @@
-package com.connectfour.AuthController;
+package com.connectfour.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
