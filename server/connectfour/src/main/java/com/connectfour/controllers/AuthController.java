@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.connectfour.dto.LoginRequest;
 import com.connectfour.dto.RegisterRequest;
 import com.connectfour.entity.User;
+import com.connectfour.entity.UserStats;
 import com.connectfour.repository.UserRepository;
 import com.connectfour.utilities.JwtUtil;
 import com.connectfour.utilities.PasswordUtil;
@@ -80,6 +81,15 @@ public class AuthController {
 
         // Creates new User
         User newUser = new User(payload.getUsername(), hashedPassword);
+
+        // Create a new stats record and link to user
+        UserStats stats = new UserStats();
+        stats.setWins(0);
+        stats.setLosses(0);
+        stats.setRatio(0.0);
+
+        newUser.setUserStats(stats); // This calls the helper and links both 
+        
         // Saves to Database
         userRepository.save(newUser);
 

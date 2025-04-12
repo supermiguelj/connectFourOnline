@@ -1,0 +1,79 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and background styling */
+body {
+    font-family: "League Spartan", sans-serif;
+    font-size: 16px;
+    background-image: linear-gradient(to bottom right, rgb(50,50,136), rgb(7,0,36));
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* Create game page container */
+#createGameDiv {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 16px;
+    margin-top: 60px;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Heading */
+#h1CreateGame {
+    font-size: 24px;
+    color: #fff;
+}
+
+/* Input styling */
+input[type="text"] {
+    padding: 10px;
+    margin-top: 10px;
+    width: 80%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Button for creating game */
+#createGameBtn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#createGameBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Game status and instructions */
+#gameInstructions {
+    font-size: 18px;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.bold {
+    font-weight: bold;
+}

@@ -1,47 +1,44 @@
-// src/components/home.js
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import "./App.css";
 
-const HomePage = () => {
-  const navigate = useNavigate();
+function HomePage() {
+  const [username, setUsername] = useState("");
+  const [message, setMessage] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
+    // Assuming the token is saved in localStorage after login
     const token = localStorage.getItem("token");
-
-    // If no token, redirect to login
     if (!token) {
-      navigate("/login");
-    } else {
-      // Optional: Token could be validated with the server here if needed
+      setMessage("You need to be logged in to access the homepage.");
+      history.push("/login");
+      return;
     }
-  }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
+    const decodedToken = JSON.parse(atob(token.split(".")[1]));
+    setUsername(decodedToken.sub);
+  }, [history]);
+
+  // Function to create a new game
+  const createGame = () => {
+    history.push("/create-game"); // Redirect to Create Game Page
+  };
+
+  // Function to log out the user
+  const logout = () => {
+    localStorage.removeItem("token"); // Remove the token from localStorage
+    history.push("/login"); // Redirect the user to the login page
   };
 
   return (
-    <div style={{ paddingTop: "100px", textAlign: "center" }}>
-      <h1>Welcome to Connect4!</h1>
-      <p>You are successfully logged in.</p>
-      <button 
-        onClick={handleLogout} 
-        style={{
-          padding: "10px 20px",
-          fontSize: "16px",
-          borderRadius: "8px",
-          backgroundColor: "#ff4d4f",
-          color: "white",
-          border: "none",
-          cursor: "pointer",
-          marginTop: "20px"
-        }}
-      >
-        Logout
-      </button>
+    <div id="homePageDiv">
+      <h1>Welcome, {username}!</h1>
+      <p>Welcome to Connect Four. What would you like to do?</p>
+      <button onClick={createGame}>Create a New Game</button>
+      <button onClick={logout}>Logout</button>
     </div>
   );
-};
+}
 
 export default HomePage;

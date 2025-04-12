@@ -8,8 +8,8 @@ public enum GameStatus {
     PLAYER_TWO_WINS("Player Two wins!"),
     DRAW("Game ended in a draw."),
     INVALID_MOVE("That move is not allowed."),
-    GAME_OVER("The game is already over.");
-
+    GAME_OVER("The game is already over."),
+    FINISHED("The game is now over.");
     private final String message;
 
     GameStatus(String message) {

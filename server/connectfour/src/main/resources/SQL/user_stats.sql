@@ -1,8 +1,7 @@
 CREATE TABLE user_stats (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT PRIMARY KEY,
     wins INT DEFAULT 0,
     losses INT DEFAULT 0,
-    win_ratio DECIMAL(5,2) DEFAULT 0.00,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    win_ratio DOUBLE DEFAULT 0.0,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );

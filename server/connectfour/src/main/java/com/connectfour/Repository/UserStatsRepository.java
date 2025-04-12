@@ -1,8 +1,11 @@
 package com.connectfour.repository;
 
-import com.connectfour.entity.UserStats;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserStatsRepository extends JpaRepository<UserStats, Long> {
-    UserStats findByUserId(Long userId);
+import com.connectfour.entity.UserStats;
+
+@Repository
+public interface UserStatsRepository extends JpaRepository<UserStats, String> {
+    
 }
