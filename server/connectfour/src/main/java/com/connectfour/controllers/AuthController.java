@@ -23,13 +23,10 @@ import com.connectfour.repository.UserRepository;
 import com.connectfour.utilities.JwtUtil;
 import com.connectfour.utilities.PasswordUtil;
 
-
-// This is the REST API that uses the DTO as a payload for sending it as a POST request to
-// The backend 
 @RestController
-//RequestMapping("/api/auth")
 @CrossOrigin(origins = "http://localhost:3000") // Connects to React
 public class AuthController {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -45,7 +42,7 @@ public class AuthController {
             User user = userOpt.get();
 
             // Checks for password validation
-            if (PasswordUtil.checkPassword(payload.getPassword(), user.getPasswordHash())) { //Passoword matches
+            if (PasswordUtil.checkPassword(payload.getPassword(), user.getPasswordHash())) { // Password matches
                 // Handles token generation for session
                 String jwt = JwtUtil.generateToken(user);
                 response.put("message", "Login Successful!");
@@ -88,14 +85,15 @@ public class AuthController {
         stats.setLosses(0);
         stats.setRatio(0.0);
 
-        newUser.setUserStats(stats); // This calls the helper and links both 
-        
-        // Saves to Database
-        userRepository.save(newUser);
+        // Ensure User and UserStats are linked correctly
+        newUser.setUserStats(stats);
+        stats.setUser(newUser); // This establishes the bi-directional relationship
+
+        // Saves User and UserStats to the Database
+        userRepository.save(newUser); // This will also save UserStats due to cascading if configured
 
         response.put("message", "User successfully registered");
         return ResponseEntity.ok(response);
-
     }
 
     @GetMapping("/home")

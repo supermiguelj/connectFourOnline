@@ -3,6 +3,7 @@ package com.connectfour.entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -15,6 +16,7 @@ public class User {
     private String passwordHash;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private UserStats userStats;
 
     // Constructors, Getters, and Setters

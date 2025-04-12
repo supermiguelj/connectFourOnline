@@ -7,5 +7,4 @@ import com.connectfour.entity.UserStats;
 
 @Repository
 public interface UserStatsRepository extends JpaRepository<UserStats, String> {
-    
 }
