@@ -89,7 +89,7 @@ public class AuthController {
     }
 
     @GetMapping("/home")
-    public ResponseEntity<String> testCors(@RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity<String> ValidateSession(@RequestHeader("Authorization") String authHeader) {
         String token = authHeader.replace("Bearer", "");
         // Token authentication fails
         if (!JwtUtil.validateToken(token)) {
