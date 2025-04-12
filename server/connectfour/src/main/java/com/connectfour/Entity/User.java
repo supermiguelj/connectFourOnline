@@ -1,7 +1,9 @@
 package com.connectfour.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -10,6 +12,8 @@ public class User {
     @Id
     private String username;
     private String passwordHash;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserStats userStats;
 
     // No-arg constructor required so Hibernate doesn't have a panic attack
     public User() {
